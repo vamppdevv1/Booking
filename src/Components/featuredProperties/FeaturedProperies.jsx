@@ -1,5 +1,5 @@
 import "./featuredProperties.css";
-export const FeaturedProperies = () => {
+export const FeaturedProperties = () => {
   return (
     <div className="fp">
       <div className="fpItem">
