@@ -1,6 +1,6 @@
 // importing
 import "./header.css";
-import { useState } from "react";
+import {  useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
@@ -14,7 +14,11 @@ import {
   faPerson,
 } from "@fortawesome/free-solid-svg-icons";
 import { DateRange } from "react-date-range";
+import { useNavigate } from "react-router-dom";
 export const Header = ({ type }) => {
+  //destination
+  const [destination, setDestination] = useState("");
+
   // calandar state
   const [date, setDate] = useState([
     {
@@ -24,7 +28,7 @@ export const Header = ({ type }) => {
     },
   ]);
   // toggle calandar or options
- const [activePanel, setActivePanel] = useState(null)
+  const [activePanel, setActivePanel] = useState(null);
   //options state
 
   const [options, setOptions] = useState({
@@ -33,21 +37,33 @@ export const Header = ({ type }) => {
     room: 1,
   });
   const minValues = {
-  adult: 1,
-  children: 0,
-  room: 1,
-};
+    adult: 1,
+    children: 0,
+    room: 1,
+  };
+  //handle Search
+  const navigate = useNavigate();
+  const handleSearch = () => {
+    navigate("/hotels", { state: { destination, options, date } });
+  };
   const handleOption = (name, operation) => {
     setOptions((prev) => {
       return {
         ...prev,
-        [name]: operation === "i" ? prev[name] + 1 : Math.max(minValues[name], prev[name] - 1),
+        [name]:
+          operation === "i"
+            ? prev[name] + 1
+            : Math.max(minValues[name], prev[name] - 1),
       };
     });
   };
   return (
     <div className="header">
-      <div className={type === "list"? "headerContainer listMode" : "headerContainer"}>
+      <div
+        className={
+          type === "list" ? "headerContainer listMode" : "headerContainer"
+        }
+      >
         {/* header list */}
         <div className="headerList">
           <div className="headerListItem active">
@@ -71,7 +87,7 @@ export const Header = ({ type }) => {
             <span>Airport taxis</span>
           </div>
         </div>
-        {type !== "list" &&
+        {type !== "list" && (
           <>
             <h1 className="headerTitle">
               A life time of discounte? It is genius
@@ -91,19 +107,23 @@ export const Header = ({ type }) => {
                   type="text"
                   placeholder="Where are you going?"
                   className="headerSearchInput"
+                  onChange={(e) => setDestination(e.target.value)}
                 />
               </div>
               {/* calander and date */}
               <div className="headerSearchItem">
                 <FontAwesomeIcon icon={faCalendarDays} className="headerIcon" />
                 <span
-                  onClick={() => setActivePanel(activePanel ==="date" ? null : "date")}
+                  onClick={() =>
+                    setActivePanel(activePanel === "date" ? null : "date")
+                  }
                   className="headerSearchText"
                 >{`${format(date[0].startDate, "MM/dd/yyyy")} to ${format(date[0].endDate, "MM/dd/yyyy")}`}</span>
-                {activePanel=== "date" && (
+                {activePanel === "date" && (
                   <DateRange
                     editableDateInputs={true}
                     onChange={(item) => setDate([item.selection])}
+                    minDate={new Date()}
                     moveRangeOnFirstSelection={false}
                     ranges={date}
                     className="date"
@@ -114,7 +134,9 @@ export const Header = ({ type }) => {
               <div className="headerSearchItem">
                 <FontAwesomeIcon icon={faPerson} className="headerIcon" />
                 <span
-                  onClick={() => setActivePanel(activePanel === "options" ? null : "options")}
+                  onClick={() =>
+                    setActivePanel(activePanel === "options" ? null : "options")
+                  }
                   className="headerSearchText"
                 >{`${options.adult} adult ${options.children} children ${options.room} room`}</span>
                 {activePanel === "options" && (
@@ -132,7 +154,6 @@ export const Header = ({ type }) => {
                           {options.adult}
                         </span>
                         <button
-                      
                           className="optionCounterButton"
                           onClick={() => handleOption("adult", "i")}
                         >
@@ -144,7 +165,6 @@ export const Header = ({ type }) => {
                       <span className="optionText">Children</span>
                       <div className="optionCounter">
                         <button
-                        
                           className="optionCounterButton"
                           onClick={() => handleOption("children", "d")}
                         >
@@ -154,7 +174,6 @@ export const Header = ({ type }) => {
                           {options.children}
                         </span>
                         <button
-                       
                           className="optionCounterButton"
                           onClick={() => handleOption("children", "i")}
                         >
@@ -166,7 +185,6 @@ export const Header = ({ type }) => {
                       <span className="optionText">Room</span>
                       <div className="optionCounter">
                         <button
-                      
                           className="optionCounterButton"
                           onClick={() => handleOption("room", "d")}
                         >
@@ -176,7 +194,6 @@ export const Header = ({ type }) => {
                           {options.room}
                         </span>
                         <button
-                       
                           className="optionCounterButton"
                           onClick={() => handleOption("room", "i")}
                         >
@@ -189,11 +206,13 @@ export const Header = ({ type }) => {
               </div>
               {/* button */}
               <div className="headerSearchItem">
-                <button className="headerButton">Search</button>
+                <button className="headerButton" onClick={handleSearch}>
+                  Search
+                </button>
               </div>
             </div>
           </>
-        }
+        )}
       </div>
     </div>
   );
