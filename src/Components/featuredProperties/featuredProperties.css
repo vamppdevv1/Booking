@@ -1,0 +1,35 @@
+.fp{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width:1024px ;
+    gap: 20px;
+    margin-bottom: 100px;
+}
+.fpItem{
+    flex: 1;
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: 10px;
+}
+.fpImg{
+    width: 100%;
+}
+.fpName{
+    font-weight: bold;
+}
+.fpCity{
+    font-weight: 300;
+}
+
+.fpPrice{
+    font-weight: 600;
+}
+.fpRating>button{
+    margin-right: 3px;
+    border: 1px solid black;
+    border-radius: 10px;
+    cursor: pointer;
+}
