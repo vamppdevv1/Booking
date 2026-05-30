@@ -1,7 +1,8 @@
 // importing
 import "./header.css";
-import {  useState } from "react";
+import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Button } from "../button/Button";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import format from "date-fns/format";
@@ -144,61 +145,55 @@ export const Header = ({ type }) => {
                     <div className="optionItem">
                       <span className="optionText">Adult</span>
                       <div className="optionCounter">
-                        <button
-                          className="optionCounterButton"
+                        <Button
+                          variant="circle"
+                          text="-"
                           onClick={() => handleOption("adult", "d")}
-                        >
-                          -
-                        </button>
+                        />
                         <span className="optionCounterNumber">
                           {options.adult}
                         </span>
-                        <button
-                          className="optionCounterButton"
+                        <Button
+                          variant="circle"
+                          text="+"
                           onClick={() => handleOption("adult", "i")}
-                        >
-                          +
-                        </button>
+                        />
                       </div>
                     </div>
                     <div className="optionItem">
                       <span className="optionText">Children</span>
                       <div className="optionCounter">
-                        <button
-                          className="optionCounterButton"
+                        <Button
+                          variant="circle"
+                          text="-"
                           onClick={() => handleOption("children", "d")}
-                        >
-                          -
-                        </button>
+                        />
                         <span className="optionCounterNumber">
                           {options.children}
                         </span>
-                        <button
-                          className="optionCounterButton"
+                        <Button
+                          variant="circle"
+                          text="+"
                           onClick={() => handleOption("children", "i")}
-                        >
-                          +
-                        </button>
+                        />
                       </div>
                     </div>
                     <div className="optionItem">
                       <span className="optionText">Room</span>
                       <div className="optionCounter">
-                        <button
-                          className="optionCounterButton"
+                        <Button
+                          variant="circle"
+                          text="-"
                           onClick={() => handleOption("room", "d")}
-                        >
-                          -
-                        </button>
+                        />
                         <span className="optionCounterNumber">
                           {options.room}
                         </span>
-                        <button
-                          className="optionCounterButton"
+                        <Button
+                          variant="circle"
+                          text="+"
                           onClick={() => handleOption("room", "i")}
-                        >
-                          +
-                        </button>
+                        />
                       </div>
                     </div>
                   </div>
@@ -206,9 +201,11 @@ export const Header = ({ type }) => {
               </div>
               {/* button */}
               <div className="headerSearchItem">
-                <button className="headerButton" onClick={handleSearch}>
-                  Search
-                </button>
+                <Button
+                  text="Search"
+                  variant="searchButton"
+                  onClick={handleSearch}
+                />
               </div>
             </div>
           </>

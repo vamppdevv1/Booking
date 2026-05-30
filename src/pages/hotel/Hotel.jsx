@@ -1,5 +1,5 @@
 import "./hotel.css";
-import { Navbar } from "../../Components/navbar/Navbar";
+import { Button } from "../../Components/button/Button";
 import { Header } from "../../Components/header/Header";
 import { MailList } from "../../Components/mailList/MailList";
 import { Footer } from "../../Components/footer/Footer";
@@ -51,7 +51,6 @@ export const Hotel = () => {
   ];
   return (
     <div>
-      <Navbar />
       <Header type="list" />
       <div className="hotelContainer">
         {open && (
@@ -65,7 +64,7 @@ export const Hotel = () => {
           </div>
         )}
         <div className="hotelWrapper">
-          <button className="Booknow">Reserve or Book now</button>
+          <Button text="Reserve or Book now" variant="searchButton"/>
           <h1 className="hotelTitle">Grand Hotel</h1>
           <div className="hotelAdress">
             <FontAwesomeIcon icon={faLocation} />
@@ -115,7 +114,7 @@ export const Hotel = () => {
               <h2>
                 <b>$945</b> (9 nights)
               </h2>
-              <button>Reserve or Book Now!</button>
+                <Button text="Reserve or Book now" variant="searchButton"/>
             </div>
           </div>
         </div>

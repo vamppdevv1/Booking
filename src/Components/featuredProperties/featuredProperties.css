@@ -27,9 +27,3 @@
 .fpPrice{
     font-weight: 600;
 }
-.fpRating>button{
-    margin-right: 3px;
-    border: 1px solid black;
-    border-radius: 10px;
-    cursor: pointer;
-}

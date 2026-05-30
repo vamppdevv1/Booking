@@ -1,4 +1,3 @@
-import { Navbar } from "../../Components/navbar/Navbar";
 import { Header } from "../../Components/header/Header";
 import { Featured } from "../../Components/featured/Featured";
 import { PropertyList } from "../../Components/propertyList/PropertyList";
@@ -9,7 +8,7 @@ import "./home.css";
 export const Home = () => {
   return (
     <div>
-      <Navbar />
+
       <Header />
       <div className="homeContainer">
         <Featured />

@@ -1,4 +1,5 @@
 import "./featuredProperties.css";
+import { Button } from "../button/Button";
 export const FeaturedProperties = () => {
   return (
     <div className="fp">
@@ -12,7 +13,7 @@ export const FeaturedProperties = () => {
         <span className="fpCity">Madrid</span>
         <span className="fpPrice">Starting from $120</span>
         <div className="fpRating">
-          <button>8.9</button>
+         <Button text="8.9"/>
           <span>Excellent</span>
         </div>
       </div>
@@ -26,7 +27,7 @@ export const FeaturedProperties = () => {
         <span className="fpCity">Austin</span>
         <span className="fpPrice">Starting from $140</span>
         <div className="fpRating">
-          <button>9.3</button>
+               <Button text="8.9"/>
           <span>Exceptional</span>
         </div>
       </div>
@@ -40,7 +41,7 @@ export const FeaturedProperties = () => {
         <span className="fpCity">Lisbon</span>
         <span className="fpPrice">Starting from $99</span>
         <div className="fpRating">
-          <button>8.8</button>
+             <Button text="8.9"/>
           <span>Excellent</span>
         </div>
       </div>
@@ -54,7 +55,7 @@ export const FeaturedProperties = () => {
         <span className="fpCity">Berlin</span>
         <span className="fpPrice">Starting from $105</span>
         <div className="fpRating">
-          <button>8.9</button>
+                 <Button text="8.9"/>
           <span>Excellent</span>
         </div>
       </div>

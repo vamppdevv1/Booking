@@ -1,4 +1,5 @@
 import "./mailList.css";
+import { Button } from "../button/Button";
 export const MailList = () => {
   return (
     <div className="mail">
@@ -8,7 +9,7 @@ export const MailList = () => {
       </span>
       <div className="mailInputContainer">
         <input type="text" placeholder="Your email" />
-        <button>Subscribe</button>
+       <Button text="Subscribe" variant="searchButton"/>
       </div>
     </div>
   );

@@ -12,17 +12,10 @@
     gap: 10px;
     position: relative;
 }
-.Booknow{
+.hotelWrapper > .btn{
 position:absolute ;
 top: 10px;
 right: 0px;
-border: none;
-padding: 10px 20px;
-background-color: #0071c2;
-color: white;
-font-weight: bold;
-cursor: pointer;
-border-radius: 10px;
 }
 
 .hotelImgWrapper{
@@ -84,16 +77,6 @@ border-radius: 10px;
 }
 .hotelDetailsPrice>h2{
  font-weight: 400;
-    
-}
-.hotelDetailsPrice>button{
-border: none;
-padding: 10px 20px;
-background-color: #0071c2;
-color: white;
-font-weight: bold;
-cursor: pointer;
-border-radius: 10px;
     
 }
 .hotelDesc{

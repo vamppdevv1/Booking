@@ -1,4 +1,5 @@
 import "./searchItem.css";
+import { Button } from "../button/Button";
 export const SearchItem = () => {
   return (
     <div className="searchItem">
@@ -25,12 +26,12 @@ export const SearchItem = () => {
       <div className="siDetails">
         <div className="siRating">
           <span>Excellent</span>
-          <button>8.9</button>
+               <Button text="8.9"/>
         </div>
         <div className="siDetailTexts">
           <span className="siPrice">$155</span>
            <span className="siTaxOp">Includes taxes and fees</span>
-           <button className="siCheckButton">See availability</button>
+           <Button text="See availability" variant="searchButton"/>
         </div>
       </div>
     </div>

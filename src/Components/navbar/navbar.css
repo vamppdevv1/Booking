@@ -16,12 +16,8 @@
     font-weight: 500;
     font-size: larger;
 }
-.navButton{
-    margin-left: 30px;
-    padding: 10px 15px;
-    border-radius: 5px;
-    border: 1px solid white;
-    background-color: #003580;
-    color: white;
-    cursor: pointer;
+.navItems{
+display: flex;
+gap: 20px;
+
 }

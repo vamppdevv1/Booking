@@ -1,6 +1,6 @@
-import { Navbar } from "../../Components/navbar/Navbar";
 import { Header } from "../../Components/header/Header";
 import { SearchItem } from "../../Components/searchItem/SearchItem";
+import { Button } from "../../Components/button/Button";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { DateRange } from "react-date-range";
@@ -19,7 +19,6 @@ export const List = () => {
 
   return (
     <div>
-      <Navbar />
       <Header type="list" />
       <div className="listContainer">
         <div className="listWrapper">
@@ -92,7 +91,7 @@ export const List = () => {
                 </div>
               </div>
             </div>
-            <button>Search</button>
+             <Button text="Search" variant="searchButton"/>
           </div>
           <div className="listResult">
             <SearchItem />

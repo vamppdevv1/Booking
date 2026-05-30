@@ -1,20 +1,20 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import {Home} from "./pages/home/Home";
+import { Home } from "./pages/home/Home";
 import { List } from "./pages/list/List";
 import { Hotel } from "./pages/hotel/Hotel";
+import { Navbar } from "./Components/navbar/Navbar";
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home/>} />
-      </Routes>
-       <Routes>
-        <Route path="/hotels" element={<List/>} />
-      </Routes>
-       <Routes>
-        <Route path="/hotels/:id" element={<Hotel/>} />
-      </Routes>
-    </BrowserRouter>
+    <>
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/hotels" element={<List />} />
+          <Route path="/hotels/:id" element={<Hotel />} />
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 
