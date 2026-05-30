@@ -9,7 +9,7 @@ export const MailList = () => {
       </span>
       <div className="mailInputContainer">
         <input type="text" placeholder="Your email" />
-       <Button text="Subscribe" variant="searchButton"/>
+        <Button text="Subscribe" variant="searchButton" />
       </div>
     </div>
   );

@@ -11,10 +11,10 @@
 .btn--searchButton {
   padding: 10px;
 }
-.btn--circle{
-display: flex;
-align-items: center;
-justify-content: center;
-width: 20px;
-height: 20px;
+.btn--circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
 }

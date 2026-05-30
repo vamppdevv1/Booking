@@ -13,7 +13,7 @@ export const FeaturedProperties = () => {
         <span className="fpCity">Madrid</span>
         <span className="fpPrice">Starting from $120</span>
         <div className="fpRating">
-         <Button text="8.9"/>
+          <Button text="8.9" />
           <span>Excellent</span>
         </div>
       </div>
@@ -27,7 +27,7 @@ export const FeaturedProperties = () => {
         <span className="fpCity">Austin</span>
         <span className="fpPrice">Starting from $140</span>
         <div className="fpRating">
-               <Button text="8.9"/>
+          <Button text="8.9" />
           <span>Exceptional</span>
         </div>
       </div>
@@ -41,7 +41,7 @@ export const FeaturedProperties = () => {
         <span className="fpCity">Lisbon</span>
         <span className="fpPrice">Starting from $99</span>
         <div className="fpRating">
-             <Button text="8.9"/>
+          <Button text="8.9" />
           <span>Excellent</span>
         </div>
       </div>
@@ -55,7 +55,7 @@ export const FeaturedProperties = () => {
         <span className="fpCity">Berlin</span>
         <span className="fpPrice">Starting from $105</span>
         <div className="fpRating">
-                 <Button text="8.9"/>
+          <Button text="8.9" />
           <span>Excellent</span>
         </div>
       </div>

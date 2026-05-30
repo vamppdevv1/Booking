@@ -21,6 +21,7 @@
   display: flex;
   align-items: center;
   gap: 5px;
+  position: relative;
 }
 .headerListItem.active {
   border: 1px solid white;
@@ -47,14 +48,19 @@
   border-radius: 10px;
   position: absolute;
   bottom: -25px;
-  width: 100%;
+  width: 80%;
   max-width: 1024px;
+  left: 50%;
+  z-index: 1000;
+  transform: translateX(-50%);
 }
 .headerSearchItem {
   display: flex;
   align-items: center;
   gap: 10px;
+  position: relative;
 }
+
 .headerSearchInput {
   border: none;
   outline: none;
@@ -70,7 +76,8 @@
 .date {
   position: absolute;
   top: 50px;
-  z-index: 2;
+
+  z-index: 1000;
 }
 .headerButton {
   padding: 6px;
@@ -86,7 +93,7 @@
   color: gray;
   border-radius: 10px;
   padding: 20px;
-  z-index: 2;
+  z-index: 999;
 }
 .optionItem {
   width: 200px;
@@ -109,4 +116,44 @@
 
 .optionCounterButton:disabled {
   cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .headerList {
+    gap: 20px;
+    flex-direction: column;
+  }
+  .headerContainer {
+    margin-bottom: 220px;
+    padding: 15px;
+  }
+  .headerSearch {
+    flex-direction: column;
+    height: auto;
+    width: calc(100% - 40px);
+    gap: 15px;
+    padding: 15px;
+    bottom: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    align-items: center;
+    justify-content: center;
+  }
+  .date {
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+  }
+  .options {
+    top: 90px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+  }
+}
+@media (max-width: 1040px) {
+  .headerContainer {
+    padding: 15px;
+  }
 }

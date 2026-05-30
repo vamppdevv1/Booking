@@ -1,17 +1,27 @@
-.footer{
-    margin-top: 40px;
-    width: 100%;
-    max-width: 1024px;
-    font-size: 13px;
+.footer {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 40px;
+  width: 100%;
+  max-width: 1024px;
+  font-size: 13px;
+
 }
-.fLists{
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 50px;
+.fLists {
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 50px;
 }
-.fListItem{
-margin-bottom: 10px;
-cursor: pointer;
-color: #003580;
+.fListItem {
+  margin-bottom: 10px;
+  cursor: pointer;
+  color: #003580;
+}
+@media(max-width:660px){
+  .fLists{
+    text-align: center;
+display: inline;
+
+  }
 }
