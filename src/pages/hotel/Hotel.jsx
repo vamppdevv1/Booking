@@ -65,6 +65,9 @@ export const Hotel = () => {
         )}
         <div className="hotelWrapper">
           <Button text="Reserve or Book now" variant="searchButton"/>
+          <div className="hotelInfo">
+
+        
           <h1 className="hotelTitle">Grand Hotel</h1>
           <div className="hotelAdress">
             <FontAwesomeIcon icon={faLocation} />
@@ -76,6 +79,7 @@ export const Hotel = () => {
           <span className="hotelPriceHighlight">
             Book a stay over $114 at this property and get a free airport taxi
           </span>
+            </div>
           <div className="hotelImages">
             {photos.map((img, i) => (
               <div className="hotelImgWrapper">

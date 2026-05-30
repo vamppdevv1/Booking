@@ -12,7 +12,7 @@
 }
 .listSearch {
   flex: 1;
-  background-color: rgb(243, 246, 65);
+  background-color: #003580;
   padding: 10px;
   border-radius: 10px;
   position: sticky;
@@ -58,10 +58,13 @@ border-radius: 10px;
   justify-content: space-between;
   flex-direction: column;
   margin-bottom: 10px;
+  gap: 5px;
   color: #555;
 }
 .lsOptionInput{
   width: 50px;
+  border-radius: 10px;
+  border: none;
 }
 .lsOptionItem>span{
   margin-bottom: 5px;
@@ -72,3 +75,31 @@ border-radius: 10px;
 .listSearch .btn--searchButton{
   width: 100%;
 }
+
+.lsOptionText{
+  color: white;
+}
+
+@media(max-width:1000px){
+.listWrapper{
+  flex-direction: column;
+  align-items: center;
+}
+.listSearch {
+  background-color: #003580;
+  padding: 10px;
+
+  text-align: center;
+  border-radius: 10px;
+  position: relative;
+  width: 80%;
+}
+.lsOptionItem{
+  display: flex;
+justify-content: center;
+align-items: center;
+
+}
+.lsOptionInput{
+  width: 100px;
+}}

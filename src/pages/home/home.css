@@ -5,10 +5,16 @@
   align-items: center;
   gap: 30px;
 }
-.homeTitle{
-    width: 100%;
-    max-width: 1024px;
-    font-size: 20px;
-    font-weight: 600;
+.homeTitle {
+  width: 100%;
+  max-width: 1024px;
+  font-size: 20px;
+  font-weight: 600;
 }
 
+@media (max-width: 768px) {
+  .homeTitle {
+    text-align: center;
+    font-size: 25px;
+  }
+}

@@ -21,11 +21,12 @@
 .pListTitles > h1 {
   font-size: 18px;
   font-weight: 500;
-  margin-bottom: 2px;
+  margin-bottom: 5px;
 }
 .pListTitles > h2 {
   font-size: 14px;
   font-weight: 300;
+  margin-bottom: 5px;
 }
 
 
