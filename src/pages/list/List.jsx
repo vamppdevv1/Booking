@@ -1,5 +1,6 @@
 import { Navbar } from "../../Components/navbar/Navbar";
 import { Header } from "../../Components/header/Header";
+import { SearchItem } from "../../Components/searchItem/SearchItem";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { DateRange } from "react-date-range";
@@ -93,7 +94,17 @@ export const List = () => {
             </div>
             <button>Search</button>
           </div>
-          <div className="listResult"></div>
+          <div className="listResult">
+            <SearchItem />
+            <SearchItem />
+            <SearchItem />
+            <SearchItem />
+            <SearchItem />
+            <SearchItem />
+            <SearchItem />
+            <SearchItem />
+            <SearchItem />
+          </div>
         </div>
       </div>
     </div>
