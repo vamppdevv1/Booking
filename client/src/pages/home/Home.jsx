@@ -8,7 +8,6 @@ import "./home.css";
 export const Home = () => {
   return (
     <div>
-
       <Header />
       <div className="homeContainer">
         <Featured />

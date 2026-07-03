@@ -28,6 +28,7 @@
 @media (max-width:768px){
   .featured{
    flex-direction: column;
+   width: 90%;
   }
   .featuredItem{
     margin: 0px 10px;

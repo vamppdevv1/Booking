@@ -38,6 +38,6 @@
 @media (max-width: 768px) {
   .pList {
 flex-direction: column;
-width: 60%;
+width: 85%;
   }
 }

@@ -91,7 +91,7 @@ export const Header = ({ type }) => {
         {type !== "list" && (
           <>
             <h1 className="headerTitle">
-              A life time of discounte? It is genius
+              A life time of discount? It is genius
             </h1>
             <p className="headerDesc">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi
