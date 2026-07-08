@@ -1,5 +1,5 @@
 import express from "express";
-import { verifyUser, verifyAdmin, verifyToken } from "../utils/verifyToken.js";
+import { verifyAdmin, verifyToken } from "../utils/verifyToken.js";
 
 import {
   createHotel,
@@ -11,11 +11,11 @@ import {
 //config
 const router = express.Router();
 
-router.route("/").post(verifyAdmin, createHotel).get( getAllHotels);
+router.route("/").post(verifyToken, verifyAdmin, createHotel).get(getAllHotels);
 router
   .route("/:id")
-  .put(verifyAdmin, updateHotel)
-  .delete(verifyAdmin, deleteHotel)
-  .get(getOneHotel);
+  .put(verifyToken, verifyAdmin, updateHotel)
+  .delete(verifyToken, verifyAdmin, deleteHotel)
+  .get(verifyToken, getOneHotel);
 
 export default router;

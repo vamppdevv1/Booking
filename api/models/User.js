@@ -21,4 +21,4 @@ const UserSchema = new Schema({
   },
 },{timestamps: true});
 
-export default mongoose.model("Room", UserSchema);
+export default mongoose.model("User", UserSchema);

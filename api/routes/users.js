@@ -11,8 +11,8 @@ const router = express.Router();
 router.route("/").get(verifyAdmin,getAllUsers);
 router
   .route("/:id")
-  .put(verifyUser, updateUser)
-  .delete(verifyUser, deleteUser)
-  .get(verifyUser, getOneUser);
+  .put(verifyToken, verifyUser, updateUser)
+  .delete(verifyToken, verifyUser, deleteUser)
+  .get(verifyToken, verifyUser, getOneUser);
 
 export default router;
