@@ -21,6 +21,7 @@
 .pListTitles > h1 {
   font-size: 18px;
   font-weight: 500;
+  text-transform: uppercase;
   margin-bottom: 5px;
 }
 .pListTitles > h2 {
