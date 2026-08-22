@@ -17,7 +17,7 @@ export const useFetch = (url) => {
     };
     fetchData();
   }, [url]);
-  const reFetch = async () => {
+  const reFetch = async (url) => {
     setLoading(true);
     try {
       const res = await axios.get(url);

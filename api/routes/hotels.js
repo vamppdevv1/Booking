@@ -20,6 +20,6 @@ router
   .route("/:id")
   .put(verifyToken, verifyAdmin, updateHotel)
   .delete(verifyToken, verifyAdmin, deleteHotel)
-  .get(verifyToken, getOneHotel);
+  .get( getOneHotel);
 
 export default router;

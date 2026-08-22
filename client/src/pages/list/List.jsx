@@ -1,8 +1,9 @@
 import { Header } from "../../Components/header/Header";
 import { SearchItem } from "../../Components/searchItem/SearchItem";
 import { Button } from "../../Components/button/Button";
-import "react-date-range/dist/styles.css"; // main css file
-import "react-date-range/dist/theme/default.css"; // theme css file
+import useFetch from "../../hooks/useFetch";
+import "react-date-range/dist/styles.css";
+import "react-date-range/dist/theme/default.css";
 import { DateRange } from "react-date-range";
 
 import format from "date-fns/format";
@@ -13,10 +14,19 @@ import { useState } from "react";
 export const List = () => {
   const location = useLocation();
   const [activePanel, setActivePanel] = useState(null);
-  const [destination] = useState(location.state.destination);
-  const [date, setDate] = useState(location.state.date);
+  const [destination, setDestination] = useState(location.state.destination);
+  const [dates, setDates] = useState(location.state.dates);
+  const [min, setMin] = useState(undefined);
+  const [max, setMax] = useState(undefined);
   const [options] = useState(location.state.options);
-
+  const { data, loading, reFetch } = useFetch(
+    `http://localhost:8800/api/hotels?city=${destination}`,
+  );
+  const handleClick = () => {
+    reFetch(
+      `http://localhost:8800/api/hotels?city=${destination}&min=${min || 0}&max=${max || 1000}`,
+    );
+  };
   return (
     <div>
       <Header type="list" />
@@ -27,7 +37,7 @@ export const List = () => {
             <div className="lsItem">
               <label htmlFor="Destination">Destination</label>
               <input
-                placeholder={destination}
+                onChange={(e) => setDestination(e.target.value)}
                 type="text"
                 name=""
                 id="Destination"
@@ -37,16 +47,16 @@ export const List = () => {
             <div className="lsItem">
               <label htmlFor="Date">Check-in Date</label>
               <span
-                id="Date"
+                id="dates"
                 onClick={() =>
-                  setActivePanel(activePanel === "date" ? null : "date")
+                  setActivePanel(activePanel === "dates" ? null : "dates")
                 }
-              >{`${format(date[0].startDate, "MM/dd/yyyy")} to ${format(date[0].endDate, "MM/dd/yyyy")}`}</span>
-              {activePanel === "date" && (
+              >{`${format(dates[0].startDate, "MM/dd/yyyy")} to ${format(dates[0].endDate, "MM/dd/yyyy")}`}</span>
+              {activePanel === "dates" && (
                 <DateRange
-                  onChange={(item) => setDate([item.selection])}
-                  minDate={new Date()}
-                  ranges={date}
+                  onChange={(item) => setDates([item.selection])}
+                  minDates={new Date()}
+                  ranges={dates}
                 />
               )}
             </div>
@@ -57,9 +67,25 @@ export const List = () => {
                 <div className="lsOptionItem">
                   <div className="lsOptionItem">
                     <span className="lsOptionText">
+                      Min price <small>per night</small>
+                    </span>
+                    <input
+                      min={1}
+                      onChange={(e) => setMin(e.target.value)}
+                      type="number"
+                      className="lsOptionInput"
+                    />
+                  </div>
+                  <div className="lsOptionItem">
+                    <span className="lsOptionText">
                       Max price <small>per night</small>
                     </span>
-                    <input min={1} type="number" className="lsOptionInput" />
+                    <input
+                      min={1}
+                      onChange={(e) => setMax(e.target.value)}
+                      type="number"
+                      className="lsOptionInput"
+                    />
                   </div>
                   <div className="lsOptionItem">
                     <span className="lsOptionText">Adult</span>
@@ -91,18 +117,22 @@ export const List = () => {
                 </div>
               </div>
             </div>
-             <Button text="Search" variant="searchButton"/>
+            <Button
+              onClick={handleClick}
+              text="Search"
+              variant="searchButton"
+            />
           </div>
           <div className="listResult">
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
+            {loading ? (
+              "loading please wait"
+            ) : (
+              <>
+                {data.map((item) => {
+                  return <SearchItem key={item._id} item={item} />;
+                })}
+              </>
+            )}
           </div>
         </div>
       </div>

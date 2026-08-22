@@ -1,6 +1,6 @@
 // importing
 import "./header.css";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button } from "../button/Button";
 import "react-date-range/dist/styles.css"; // main css file
@@ -16,19 +16,19 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { DateRange } from "react-date-range";
 import { useNavigate } from "react-router-dom";
+import { SearchContext } from "../../context/SearchContext.jsx";
 export const Header = ({ type }) => {
   //destination
   const [destination, setDestination] = useState("");
-
   // calandar state
-  const [date, setDate] = useState([
+  const [dates, setDates] = useState([
     {
       startDate: new Date(),
       endDate: new Date(),
       key: "selection",
     },
   ]);
-  // toggle calandar or options
+  // toggle calender or options
   const [activePanel, setActivePanel] = useState(null);
   //options state
 
@@ -42,10 +42,20 @@ export const Header = ({ type }) => {
     children: 0,
     room: 1,
   };
+
+  const { dispatch } = useContext(SearchContext);
   //handle Search
   const navigate = useNavigate();
   const handleSearch = () => {
-    navigate("/hotels", { state: { destination, options, date } });
+    dispatch({
+      type: "NEW_SEARCH",
+      payload: {
+        destination,
+        dates,
+        options,
+      },
+    });
+    navigate("/hotels", { state: { destination, options, dates } });
   };
   const handleOption = (name, operation) => {
     setOptions((prev) => {
@@ -119,14 +129,14 @@ export const Header = ({ type }) => {
                     setActivePanel(activePanel === "date" ? null : "date")
                   }
                   className="headerSearchText"
-                >{`${format(date[0].startDate, "MM/dd/yyyy")} to ${format(date[0].endDate, "MM/dd/yyyy")}`}</span>
+                >{`${format(dates[0].startDate, "MM/dd/yyyy")} to ${format(dates[0].endDate, "MM/dd/yyyy")}`}</span>
                 {activePanel === "date" && (
                   <DateRange
                     editableDateInputs={true}
-                    onChange={(item) => setDate([item.selection])}
+                    onChange={(item) => setDates([item.selection])}
                     minDate={new Date()}
                     moveRangeOnFirstSelection={false}
-                    ranges={date}
+                    ranges={dates}
                     className="date"
                   />
                 )}
