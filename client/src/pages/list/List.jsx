@@ -1,32 +1,53 @@
+//importing
 import { Header } from "../../Components/header/Header";
 import { SearchItem } from "../../Components/searchItem/SearchItem";
 import { Button } from "../../Components/button/Button";
+import { useLocation } from "react-router-dom";
+import { useContext, useState } from "react";
+import { DateRange } from "react-date-range";
 import useFetch from "../../hooks/useFetch";
+import format from "date-fns/format";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
-import { DateRange } from "react-date-range";
-
-import format from "date-fns/format";
-
 import "./list.css";
-import { useLocation } from "react-router-dom";
-import { useState } from "react";
+import { SearchContext } from "../../context/SearchContext";
+//func
 export const List = () => {
   const location = useLocation();
+  //states
+  const { dispatch } = useContext(SearchContext);
   const [activePanel, setActivePanel] = useState(null);
   const [destination, setDestination] = useState(location.state.destination);
   const [dates, setDates] = useState(location.state.dates);
   const [min, setMin] = useState(undefined);
   const [max, setMax] = useState(undefined);
-  const [options] = useState(location.state.options);
+  //options state breakdown
+  const [room, setRoom] = useState(location.state.options.room);
+  const [adults, setAdults] = useState(location.state.options.adults);
+  const [children, setChildren] = useState(location.state.options.children);
+  //fetching data
   const { data, loading, reFetch } = useFetch(
     `http://localhost:8800/api/hotels?city=${destination}`,
   );
+  //handling functions
   const handleClick = () => {
+    const options = {
+      room,adults,children
+    }
+    dispatch({
+      type: "NEW_SEARCH",
+      payload: {
+        dates,
+        destination,
+        options,
+      },
+    });
+    console.log(dates);
     reFetch(
       `http://localhost:8800/api/hotels?city=${destination}&min=${min || 0}&max=${max || 1000}`,
     );
   };
+  //func
   return (
     <div>
       <Header type="list" />
@@ -93,7 +114,8 @@ export const List = () => {
                       type="number"
                       min={1}
                       className="lsOptionInput"
-                      placeholder={options.adult}
+                      placeholder={adults}
+                      onChange={(e) => setAdults(e.target.value)}
                     />
                   </div>
                   <div className="lsOptionItem">
@@ -102,7 +124,8 @@ export const List = () => {
                       type="number"
                       min={0}
                       className="lsOptionInput"
-                      placeholder={options.children}
+                      placeholder={children}
+                      onChange={(e) => setChildren(e.target.value)}
                     />
                   </div>
                   <div className="lsOptionItem">
@@ -111,7 +134,8 @@ export const List = () => {
                       type="number"
                       min={1}
                       className="lsOptionInput"
-                      placeholder={options.room}
+                      placeholder={room}
+                      onChange={(e) => setRoom(e.target.value)}
                     />
                   </div>
                 </div>
@@ -123,6 +147,7 @@ export const List = () => {
               variant="searchButton"
             />
           </div>
+          {/* results */}
           <div className="listResult">
             {loading ? (
               "loading please wait"

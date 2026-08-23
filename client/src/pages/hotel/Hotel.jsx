@@ -3,6 +3,10 @@ import { Button } from "../../Components/button/Button";
 import { Header } from "../../Components/header/Header";
 import { MailList } from "../../Components/mailList/MailList";
 import { Footer } from "../../Components/footer/Footer";
+import { useContext, useState } from "react";
+import useFetch from "../../hooks/useFetch";
+import { useLocation } from "react-router-dom";
+import { SearchContext } from "../../context/SearchContext.jsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCircleArrowLeft,
@@ -12,22 +16,16 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
-import { useContext, useState } from "react";
-import useFetch from "../../hooks/useFetch";
-import { useLocation } from "react-router-dom";
-import { SearchContext } from "../../context/SearchContext.jsx";
-
+//comp
 export const Hotel = () => {
+  //states and others
   const location = useLocation();
   const id = location.pathname.split("/")[2];
   const { data, loading } = useFetch(`http://localhost:8800/api/hotels/${id}`);
+  const { dates, options } = useContext(SearchContext);
   const [slidernum, setSliderNum] = useState(0);
   const [open, setOpen] = useState(false);
-  const { dates, options } = useContext(SearchContext);
-  const handleOpen = (i) => {
-    setSliderNum(i);
-    setOpen(true);
-  };
+  //day difference func
   const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
   function dayDifference(date1, date2) {
     const timeDiff = Math.abs(date2.getTime() - date1.getTime());
@@ -35,6 +33,11 @@ export const Hotel = () => {
     return diffDays;
   }
   const days = dayDifference(dates[0].endDate, dates[0].startDate)
+  //handling func
+  const handleOpen = (i) => {
+    setSliderNum(i);
+    setOpen(true);
+  };
   const handleMove = (direction) => {
     let newSlidenum;
     if (direction === "l") {
@@ -64,11 +67,12 @@ export const Hotel = () => {
       src: "https://cf.bstatic.com/xdata/images/hotel/max1280x900/261707389.jpg?k=52156673f9eb6d5d99d3eed9386491a0465ce6f3b995f005ac71abc192dd5827&o=&hp=1",
     },
   ];
+  //func
   return (
     <div>
       <Header type="list" />
       {loading ? (
-        "Loading pleaase wait"
+        "Loading please wait"
       ) : (
         <div className="hotelContainer">
           {open && (
@@ -97,7 +101,7 @@ export const Hotel = () => {
             <Button text="Reserve or Book now" variant="searchButton" />
             <div className="hotelInfo">
               <h1 className="hotelTitle">{data.name}</h1>
-              <div className="hotelAdress">
+              <div className="hotelAddress">
                 <FontAwesomeIcon icon={faLocation} />
                 <span>{data.address}</span>
               </div>
@@ -111,7 +115,7 @@ export const Hotel = () => {
             </div>
             <div className="hotelImages">
               {photos.map((img, i) => (
-                <div className="hotelImgWrapper">
+                <div className="hotelImgWrapper" key={i}>
                   <img
                     onClick={() => handleOpen(i)}
                     className="hotelImg"

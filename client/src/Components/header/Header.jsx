@@ -3,9 +3,12 @@ import "./header.css";
 import { useContext, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button } from "../button/Button";
+import { DateRange } from "react-date-range";
+import { useNavigate } from "react-router-dom";
+import { SearchContext } from "../../context/SearchContext.jsx";
+import format from "date-fns/format";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
-import format from "date-fns/format";
 import {
   faBed,
   faPlane,
@@ -14,13 +17,11 @@ import {
   faCalendarDays,
   faPerson,
 } from "@fortawesome/free-solid-svg-icons";
-import { DateRange } from "react-date-range";
-import { useNavigate } from "react-router-dom";
-import { SearchContext } from "../../context/SearchContext.jsx";
 export const Header = ({ type }) => {
   //destination
+  const { dispatch } = useContext(SearchContext);
   const [destination, setDestination] = useState("");
-  // calandar state
+  // calender state
   const [dates, setDates] = useState([
     {
       startDate: new Date(),
@@ -31,7 +32,6 @@ export const Header = ({ type }) => {
   // toggle calender or options
   const [activePanel, setActivePanel] = useState(null);
   //options state
-
   const [options, setOptions] = useState({
     adult: 1,
     children: 0,
@@ -42,8 +42,6 @@ export const Header = ({ type }) => {
     children: 0,
     room: 1,
   };
-
-  const { dispatch } = useContext(SearchContext);
   //handle Search
   const navigate = useNavigate();
   const handleSearch = () => {
@@ -68,6 +66,7 @@ export const Header = ({ type }) => {
       };
     });
   };
+  //func
   return (
     <div className="header">
       <div
@@ -104,10 +103,8 @@ export const Header = ({ type }) => {
               A life time of discount? It is genius
             </h1>
             <p className="headerDesc">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi
-              molestiae, illum neque quisquam vitae minima, itaque fugiat ipsa
-              hic quam cumque repudiandae praesentium minus doloremque
-              perspiciatis quia eos, corporis animi!
+              Get rewarded for your travels – unlock instant savings of 10% or
+              more with a free Lamabooking account
             </p>
             {/* header search */}
             <div className="headerSearch">
@@ -121,7 +118,7 @@ export const Header = ({ type }) => {
                   onChange={(e) => setDestination(e.target.value)}
                 />
               </div>
-              {/* calander and date */}
+              {/* calender and date */}
               <div className="headerSearchItem">
                 <FontAwesomeIcon icon={faCalendarDays} className="headerIcon" />
                 <span

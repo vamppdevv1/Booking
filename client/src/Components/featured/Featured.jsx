@@ -1,7 +1,11 @@
+//import
 import "./featured.css";
 import useFetch from "../../hooks/useFetch"
+//comp
 export const Featured = () => {
+  //fetching data
   const {data,loading} = useFetch("http://localhost:8800/api/hotels/countByCity?cities=dublin,reno,austin")
+  //func
   return (
     <div className="featured">
       {loading ? "Loading please wait" : 

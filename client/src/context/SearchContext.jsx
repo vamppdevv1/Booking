@@ -1,4 +1,5 @@
 import { createContext, useReducer } from "react";
+//initial state
 const INITIAL_STATE = {
   city: undefined,
   dates: [],
@@ -8,9 +9,10 @@ const INITIAL_STATE = {
     room: undefined,
   },
 };
-
+//context creation
 export const SearchContext = createContext(INITIAL_STATE);
 
+//the reducer(manage state depending on the action)
 const SearchReducer = (state, action) => {
   switch (action.type) {
     case "NEW_SEARCH":
@@ -21,9 +23,11 @@ const SearchReducer = (state, action) => {
       return state;
   }
 };
-
+//provider
 export const SearchContextProvider = ({ children }) => {
+  //initialize state
   const [state, dispatch] = useReducer(SearchReducer, INITIAL_STATE);
+  //the provider
   return (
     <SearchContext.Provider
       value={{
