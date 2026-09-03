@@ -42,7 +42,6 @@ export const List = () => {
         options,
       },
     });
-    console.log(dates);
     reFetch(
       `http://localhost:8800/api/hotels?city=${destination}&min=${min || 0}&max=${max || 1000}`,
     );

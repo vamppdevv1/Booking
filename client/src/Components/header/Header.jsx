@@ -42,7 +42,7 @@ export const Header = ({ type }) => {
     children: 0,
     room: 1,
   };
-  //handle Search
+  //handling functions
   const navigate = useNavigate();
   const handleSearch = () => {
     dispatch({

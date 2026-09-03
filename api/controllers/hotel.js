@@ -1,4 +1,5 @@
 import Hotel from "../models/Hotel.js";
+import Room from "../models/Room.js";
 import { createError } from "../utils/error.js";
 //create
 export const createHotel = async (req, res, next) => {
@@ -48,7 +49,7 @@ export const getOneHotel = async (req, res, next) => {
 
 //get all hotels
 export const getAllHotels = async (req, res, next) => {
-  const { min, max,limit, ...others } = req.query;
+  const { min, max, limit, ...others } = req.query;
   try {
     const foundHotels = await Hotel.find({
       ...others,
@@ -85,10 +86,21 @@ export const countByType = async (req, res, next) => {
     res.status(200).json([
       { name: "Hotels", count: list[0] },
       { name: "Apartment", count: list[1] },
-      { name: "Resorts", count: list[2] },
       { name: "Villas", count: list[3] },
       { name: "Cabins", count: list[4] },
+      { name: "Resorts", count: list[2] },
     ]);
+  } catch (err) {
+    next(err);
+  }
+};
+//Get rooms
+export const getRooms = async (req, res, next) => {
+  const id = req.params.id;
+  try {
+    const hotel = await Hotel.findById(id).populate("rooms");
+    const rooms = hotel.rooms;
+    res.status(200).json(rooms);
   } catch (err) {
     next(err);
   }

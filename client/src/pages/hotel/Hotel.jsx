@@ -4,8 +4,9 @@ import { Header } from "../../Components/header/Header";
 import { MailList } from "../../Components/mailList/MailList";
 import { Footer } from "../../Components/footer/Footer";
 import { useContext, useState } from "react";
+import { AuthContext } from "../../context/AuthContext";
 import useFetch from "../../hooks/useFetch";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { SearchContext } from "../../context/SearchContext.jsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -16,6 +17,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
+import { Reserve } from "../../Components/reserve/Reserve.jsx";
 //comp
 export const Hotel = () => {
   //states and others
@@ -24,7 +26,9 @@ export const Hotel = () => {
   const { data, loading } = useFetch(`http://localhost:8800/api/hotels/${id}`);
   const { dates, options } = useContext(SearchContext);
   const [slidernum, setSliderNum] = useState(0);
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(null);
+  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
   //day difference func
   const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
   function dayDifference(date1, date2) {
@@ -32,11 +36,11 @@ export const Hotel = () => {
     const diffDays = Math.ceil(timeDiff / MILLISECONDS_PER_DAY);
     return diffDays;
   }
-  const days = dayDifference(dates[0].endDate, dates[0].startDate)
+  const days = dayDifference(dates[0].endDate, dates[0].startDate);
   //handling func
   const handleOpen = (i) => {
     setSliderNum(i);
-    setOpen(true);
+    setOpen("slider");
   };
   const handleMove = (direction) => {
     let newSlidenum;
@@ -46,6 +50,13 @@ export const Hotel = () => {
       newSlidenum = slidernum === 5 ? 0 : slidernum + 1;
     }
     setSliderNum(newSlidenum);
+  };
+  const handleClick = () => {
+    if (user) {
+      setOpen("modal");
+    } else {
+      navigate("/login");
+    }
   };
   const photos = [
     {
@@ -75,12 +86,12 @@ export const Hotel = () => {
         "Loading please wait"
       ) : (
         <div className="hotelContainer">
-          {open && (
+          {open === "slider" && (
             <div className="slider">
               <FontAwesomeIcon
                 icon={faCircleXmark}
                 className="cancelBtn"
-                onClick={() => setOpen(false)}
+                onClick={() => setOpen(null)}
               />
               <FontAwesomeIcon
                 icon={faCircleArrowLeft}
@@ -137,9 +148,20 @@ export const Hotel = () => {
                   excellent location score of 9.8!
                 </span>
                 <h2>
-                  <b>${days * data.cheapestPrice * options.room }</b> ({days} nights)
+                  <b>
+                    $
+                    {days !== 0
+                      ? days * data.cheapestPrice * options.room
+                      : data.cheapestPrice * options.room}
+                  </b>{" "}
+                  ({days === 0 ? 1 : days} {""}
+                  night{days === 0 ? "" : "s"})
                 </h2>
-                <Button text="Reserve or Book now" variant="searchButton" />
+                <Button
+                  onClick={handleClick}
+                  text="Reserve or Book now"
+                  variant="searchButton"
+                />
               </div>
             </div>
           </div>
@@ -147,6 +169,7 @@ export const Hotel = () => {
           <Footer />
         </div>
       )}
+      {open === "modal" && <Reserve setOpen={setOpen} hotelId={id} />}
     </div>
   );
 };

@@ -34,15 +34,31 @@ export const updateRoom = async (req, res, next) => {
     Room;
   }
 };
+//update room availability
+export const updateRoomAvailability = async (req, res, next) => {
+  const id = req.params.id;
+  try {
+    await Room.updateOne(
+      { "roomNumber._id": id },
+      {
+        $push: {
+          "roomNumber.$.unavailableDates": req.body.dates,
+        },
+      },
+    );
+  } catch (err) {
+    next(err);
+  }
+};
 //delete
 export const deleteRoom = async (req, res, next) => {
   const hotelId = req.params.hotelId;
   const id = req.params.id;
   try {
-    const deletedRoom = await Room.findByIdAndDelete(id);
+   await Room.findByIdAndDelete(id);
     try {
       await Hotel.findByIdAndUpdate(hotelId, {
-        $pull: { rooms: req.params.id },
+        $pull: { rooms: id },
       });
     } catch (err) {
       next(err);
@@ -57,8 +73,8 @@ export const deleteRoom = async (req, res, next) => {
 export const getOneRoom = async (req, res, next) => {
   const id = req.params.id;
   try {
-    const foundHotel = await Hotel.findById(id);
-    res.status(200).json(foundHotel);
+    const foundRoom = await Room.findById(id);
+    res.status(200).json(foundRoom);
   } catch (err) {
     next(err);
   }
@@ -73,4 +89,3 @@ export const getAllRooms = async (req, res, next) => {
     next(err);
   }
 };
-Room;
