@@ -21,7 +21,12 @@ export const Navbar = () => {
             >
               <Button text="Login" variant="navButton" />
             </Link>
-            <Button text="Register" variant="navButton" />
+            <Link
+              to="/register"
+              style={{ color: "inherit", textDecoration: "none" }}
+            >
+              <Button text="Register" variant="navButton" />
+            </Link>
           </div>
         )}
       </div>

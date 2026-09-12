@@ -1,19 +1,15 @@
 //import
-import { useContext, useState } from "react";
-import { AuthContext } from "../../context/AuthContext";
+import { useState } from "react";
 import { Button } from "../../Components/button/Button";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import axios from "axios";
-import "./login.css";
+import "./register.css";
 //comp
-export const Login = () => {
+export const Register = () => {
   //credentials
   const [credentials, setCredentials] = useState({
-    username: undefined,
-    password: undefined,
   });
-  const { loading, dispatch } = useContext(AuthContext);
   const navigate = useNavigate();
   //handling functions
   const handleChange = (e) => {
@@ -22,20 +18,18 @@ export const Login = () => {
 
   const handleClick = async (e) => {
     e.preventDefault();
-    dispatch({ type: "LOGIN_START" });
     try {
       const res = await axios.post(
-        "http://localhost:8800/api/auth/login",
+        "http://localhost:8800/api/auth/register",
         credentials,
       );
-      dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
-      toast.success("logged in successfully")
+      toast.success("Registered successfully")
       navigate("/");
     } catch (err) {
-      dispatch({ type: "LOGIN_FAILED", payload: err.response.data });
-      toast.error(err.response.data.message)
+    
     }
   };
+  console.log(credentials)
   //func
   return (
     <div className="login">
@@ -56,12 +50,43 @@ export const Login = () => {
           className="lInput"
           required
         />
+        <input
+          type="email"
+          placeholder="email"
+          id="email"
+          onChange={handleChange}
+          className="lInput"
+          required
+        />
+        <input
+          type="text"
+          placeholder="country"
+          id="country"
+          onChange={handleChange}
+          className="lInput"
+          required
+        />
+        <input
+          type="text"
+          placeholder="city"
+          id="city"
+          onChange={handleChange}
+          className="lInput"
+          required
+        />
+        <input
+          type="tel"
+          placeholder="phone"
+          id="phone"
+          onChange={handleChange}
+          className="lInput"
+          required
+        />
         <Button
-          text="Login"
+          text="Register"
           variant="searchButton"
           onClick={handleClick}
           className="lButton"
-          disabled={loading}
         />
       </div>
     </div>

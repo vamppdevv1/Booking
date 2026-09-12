@@ -8,7 +8,7 @@ export const createHotel = async (req, res, next) => {
     const savedHotel = await newHotel.save();
     res.status(200).json(savedHotel);
   } catch (err) {
-    next(err);
+    next(createError(404, "Something went wrong"));
   }
 };
 //update
@@ -22,17 +22,22 @@ export const updateHotel = async (req, res, next) => {
     );
     res.status(200).json(updatedHotel);
   } catch (err) {
-    next(err);
+    next(createError(404, "Something went wrong"));
   }
 };
 //delete
 export const deleteHotel = async (req, res, next) => {
   const id = req.params.id;
   try {
-    const deletedHotel = await Hotel.findByIdAndDelete(id);
+    const hotel = await Hotel.findById(id);
+    const rooms = hotel.rooms;
+    for (const room of rooms) {
+      await Room.findByIdAndDelete(room);
+    }
+    await Hotel.findByIdAndDelete(id);
     res.status(200).json("Hotel has been deleted successfully");
   } catch (err) {
-    next(err);
+    next(createError(404, "Something went wrong"));
   }
 };
 
@@ -43,7 +48,7 @@ export const getOneHotel = async (req, res, next) => {
     const foundHotel = await Hotel.findById(id);
     res.status(200).json(foundHotel);
   } catch (err) {
-    next(err);
+    next(createError(404, "Hotel not found"));
   }
 };
 
@@ -57,7 +62,7 @@ export const getAllHotels = async (req, res, next) => {
     }).limit(limit);
     res.status(200).json(foundHotels);
   } catch (err) {
-    next(err);
+    next(createError(404, "Something went wrong"));
   }
 };
 //Count by city
@@ -71,7 +76,7 @@ export const countByCity = async (req, res, next) => {
     );
     res.status(200).json(list);
   } catch (err) {
-    next(err);
+    next(createError(404, "Something went wrong"));
   }
 };
 //Count by type
@@ -91,7 +96,7 @@ export const countByType = async (req, res, next) => {
       { name: "Resorts", count: list[2] },
     ]);
   } catch (err) {
-    next(err);
+    next(createError(404, "Something went wrong"));
   }
 };
 //Get rooms
@@ -102,6 +107,15 @@ export const getRooms = async (req, res, next) => {
     const rooms = hotel.rooms;
     res.status(200).json(rooms);
   } catch (err) {
-    next(err);
+    next(createError(404, "Something went wrong"));
   }
 };
+//Get count
+export const getCount = async(req,res,next)=>{
+ try {
+   const count = await Hotel.countDocuments()
+ res.status(200).json(count)
+ } catch (err) {
+   next(createError(404, "Something went wrong"));
+ }
+}

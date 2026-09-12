@@ -16,7 +16,7 @@ export const createRoom = async (req, res, next) => {
     }
     res.status(200).json(savedRoom);
   } catch (err) {
-    next(err);
+    next(createError(404, "Something went wrong"));
   }
 };
 //update
@@ -30,8 +30,8 @@ export const updateRoom = async (req, res, next) => {
     );
     res.status(200).json(updatedRoom);
   } catch (err) {
-    next(err);
-    Room;
+    next(createError(404, "Something went wrong"));
+    
   }
 };
 //update room availability
@@ -47,7 +47,7 @@ export const updateRoomAvailability = async (req, res, next) => {
       },
     );
   } catch (err) {
-    next(err);
+    next(createError(404, "Something went wrong"));
   }
 };
 //delete
@@ -61,11 +61,11 @@ export const deleteRoom = async (req, res, next) => {
         $pull: { rooms: id },
       });
     } catch (err) {
-      next(err);
+      next(createError(404, "Something went wrong"));
     }
     res.status(200).json("Room has been deleted successfully");
   } catch (err) {
-    next(err);
+    next(createError(404, "Something went wrong"));
   }
 };
 
@@ -76,7 +76,7 @@ export const getOneRoom = async (req, res, next) => {
     const foundRoom = await Room.findById(id);
     res.status(200).json(foundRoom);
   } catch (err) {
-    next(err);
+    next(createError(404, "Something went wrong"));
   }
 };
 
@@ -86,6 +86,15 @@ export const getAllRooms = async (req, res, next) => {
     const foundRooms = await Room.find();
     res.status(200).json(foundRooms);
   } catch (err) {
-    next(err);
+    next(createError(404, "Something went wrong"));
   }
 };
+//Get count
+export const getCount = async(req,res,next)=>{
+ try {
+   const count = await Room.countDocuments()
+ res.status(200).json(count)
+ } catch (err) {
+   next(createError(404, "Something went wrong"));
+ }
+}

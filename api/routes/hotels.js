@@ -10,6 +10,7 @@ import {
   countByCity,
   countByType,
   getRooms,
+  getCount,
 } from "../controllers/hotel.js";
 //config
 const router = express.Router();
@@ -19,6 +20,7 @@ router
   .post(verifyToken, verifyAdmin, createHotel)
   .get(getAllHotels);
 router.get("/countByCity", countByCity);
+router.get("/getCount", getCount);
 router.get("/countByType", countByType);
 router.get("/room/:id", getRooms);
 router

@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import "./reserve.css";
+import { toast } from "sonner";
 export const Reserve = ({ setOpen, hotelId }) => {
   const [selectedRooms, setSelectedRooms] = useState([]);
   //fetch
@@ -35,7 +36,10 @@ export const Reserve = ({ setOpen, hotelId }) => {
         }),
       );
       setOpen(null);
-    } catch (err) {}
+      toast.success("reserved room successfully")
+    } catch (err) {
+      toast.error("Something went wrong")
+    }
   };
   //logic functions
   const getDatesInRange = (start, end) => {
@@ -59,12 +63,13 @@ export const Reserve = ({ setOpen, hotelId }) => {
   return (
     <div className="reserve">
       <div className="rContainer">
+        {!data.length >0 ? "noo rooms available" : ""}
         <FontAwesomeIcon
           icon={faCircleXmark}
           className="rClose"
           onClick={() => setOpen(null)}
         />
-        <span>Select your rooms:</span>
+        {data.length>0 ? <span>Select your rooms:</span> : ""}
         {data.map((room) => {
           return (
             <div className="rItem" key={room._id}>
@@ -94,11 +99,11 @@ export const Reserve = ({ setOpen, hotelId }) => {
             </div>
           );
         })}
-        <Button
+       {data.length>0&& <Button
           text="Reserve Now!"
           variant="searchButton"
           onClick={handleClick}
-        />
+        />}
       </div>
     </div>
   );

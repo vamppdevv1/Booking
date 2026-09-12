@@ -2,9 +2,10 @@
 import "./featuredProperties.css";
 import { Button } from "../button/Button";
 import useFetch from "../../hooks/useFetch";
+import { Link } from "react-router-dom";
 //comp
 export const FeaturedProperties = () => {
-//fetching data
+  //fetching data
   const { data, loading } = useFetch(
     "http://localhost:8800/api/hotels?featured=true&limit=4",
   );
@@ -26,7 +27,13 @@ export const FeaturedProperties = () => {
                   className="fpImg"
                 />
                 <div className="fpInfo">
-                  <span className="fpName">{item.name}</span>
+                  <Link
+                    to={`/hotels/${item._id}`}
+                    style={{ textDecoration: "none", color: "inherit" }}
+                  >
+                    <span className="fpName">{item.name}</span>
+                  </Link>
+
                   <span className="fpCity">{item.city}</span>
                   <span className="fpPrice">
                     Starting from ${item.cheapestPrice}

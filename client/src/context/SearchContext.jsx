@@ -11,11 +11,11 @@ const INITIAL_STATE = {
           endDate: new Date(date.endDate),
         };
       })
-    : [],
+    : [{ startDate: new Date(), endDate: new Date(), key: "selection" }],
   options: {
-    adult: savedSearch?.options?.adult ?? undefined,
-    children: savedSearch?.options?.children ?? undefined,
-    room: savedSearch?.options?.room ?? undefined,
+    adult: savedSearch?.options?.adult ?? 1,
+    children: savedSearch?.options?.children ?? 0,
+    room: savedSearch?.options?.room ?? 1,
   },
 };
 //context creation

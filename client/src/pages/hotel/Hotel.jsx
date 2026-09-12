@@ -109,7 +109,6 @@ export const Hotel = () => {
             </div>
           )}
           <div className="hotelWrapper">
-            <Button text="Reserve or Book now" variant="searchButton" />
             <div className="hotelInfo">
               <h1 className="hotelTitle">{data.name}</h1>
               <div className="hotelAddress">
@@ -142,7 +141,7 @@ export const Hotel = () => {
                 <p className="hotelDesc">{data.desc}</p>
               </div>
               <div className="hotelDetailsPrice">
-                <h1>Perfect for a {days}-night stay!</h1>
+                <h1>Perfect for a {days===0 ? 1 : days}-night stay!</h1>
                 <span>
                   Located in the real heart of Krakow, this property has an
                   excellent location score of 9.8!

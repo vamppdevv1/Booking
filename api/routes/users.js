@@ -6,9 +6,11 @@ import {
   getOneUser,
   getAllUsers,
 } from "../controllers/user.js";
+import { getCount } from "../controllers/room.js";
 //config
 const router = express.Router();
-router.route("/").get(verifyAdmin,getAllUsers);
+router.route("/").get(verifyToken,verifyAdmin, getAllUsers);
+router.get("/getCount", getCount);
 router
   .route("/:id")
   .put(verifyToken, verifyUser, updateUser)
