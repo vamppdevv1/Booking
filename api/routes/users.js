@@ -5,8 +5,8 @@ import {
   deleteUser,
   getOneUser,
   getAllUsers,
+  getCount
 } from "../controllers/user.js";
-import { getCount } from "../controllers/room.js";
 //config
 const router = express.Router();
 router.route("/").get(verifyToken,verifyAdmin, getAllUsers);

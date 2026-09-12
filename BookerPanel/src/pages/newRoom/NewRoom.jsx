@@ -18,11 +18,11 @@ export const NewRoom = ({ inputs, title }) => {
   };
   const handleClick = async (e) => {
     e.preventDefault();
-    const roomNumbers = rooms.split(",").map((room) => ({ number: room }));
+    const roomNumber = rooms.split(",").map((room) => ({ number: room }));
     try {
       await axios.post(
         `http://localhost:8800/api/rooms/${hotelId}`,
-        { ...info, roomNumbers },
+        { ...info, roomNumber },
         { withCredentials: true },
       );
       navigate("/rooms")
