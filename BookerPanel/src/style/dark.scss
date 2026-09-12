@@ -1,0 +1,104 @@
+@use "../style//variables" as *;
+.app.dark {
+  background-color: $dm-primary-background;
+  color: $dm-primary-titles;
+  .widget,
+  .chart,
+  .featured {
+    -webkit-box-shadow: $dm-shadowBox;
+    box-shadow: $dm-shadowBox;
+    .link {
+      color: $dm-secondary-titles;
+    }
+    .title {
+      color: $dm-primary-titles;
+    }
+  }
+  .newContainer {
+    .top {
+      -webkit-box-shadow: $dm-shadowBox;
+      box-shadow: $dm-shadowBox;
+    }
+    .bottom {
+      -webkit-box-shadow: $dm-shadowBox;
+      box-shadow: $dm-shadowBox;
+    }
+  }
+  .featured {
+    .desc {
+      color: $dm-secondary-titles;
+    }
+    .item {
+      .itemTitle {
+        color: $dm-secondary-titles;
+      }
+    }
+  }
+  .table {
+    background-color: $dm-primary-background;
+    .tableCell {
+      color: $dm-primary-titles;
+      border: none;
+    }
+  }
+  .navbar {
+    background-color: $dm-secondary-background;
+    color: $dm-primary-titles;
+  }
+  .sidebar {
+    background-color: $dm-secondary-background;
+    .top {
+      .logo {
+        color: $dm-primary-titles;
+      }
+    }
+    .center {
+      .title {
+        color: $dm-primary-titles;
+      }
+    }
+    ul {
+      li {
+        .icon,
+        span {
+          color: $dm-secondary-titles;
+        }
+        &:hover {
+          background-color: #333;
+        }
+      }
+    }
+  }
+  .datatable {
+    .datatableTitle {
+      color: $dm-primary-titles;
+    }
+    p{
+      color: $dm-primary-titles;
+    }
+    svg{
+      color: $dm-primary-titles;
+    }
+    .MuiDataGrid-columnHeader,
+    .MuiDataGrid-filler,
+    .MuiDataGrid-root,
+    .MuiDataGrid-row {
+      color: $dm-primary-titles;
+      background-color: $dm-primary-background;
+      &:hover {
+        background-color: $dm-primary-background;
+      }
+    }
+    .viewButton,
+    .deleteButton {
+      background-color: $dm-primary-background;
+    }
+  }
+  .datagrid {
+    color: gray;
+  }
+  input {
+    background-color: transparent;
+    color: $dm-secondary-titles;
+  }
+}
